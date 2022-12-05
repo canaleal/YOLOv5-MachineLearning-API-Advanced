@@ -15,6 +15,19 @@ import logging
 import os
 import urllib.request
 
+def increase_stride(path, stride):
+  # Get the size of the file in bytes
+  file_size = os.path.getsize(path)
+
+  # Calculate the number of times to increase the stride by 10
+  num_increases = file_size // 100000000
+
+  # Increase the stride by 10 the specified number of times
+  for _ in range(num_increases):
+    stride += 5
+
+  return stride
+
 
 # * Paths for project
 data_folder_path = 'src/data'
@@ -35,9 +48,11 @@ def get_google_video_for_processing(video_link=''):
         # * Download the file and load the raw data
         file_id = gdownload_util.download_drive_file(
             raw_url=video_link, save_path_url=video_save_path)
+        
+     
 
         # * Create the subprocess
-        stride = 1
+        stride = increase_stride(video_save_path, 1)
         detect_python_path = 'C:/Users/alexc/Documents/MachineLearning/yolov5/detect.py'
         process = f'python {detect_python_path} --source {video_save_path} --vid-stride {stride} --conf-thres {0.4}'
         callSubProcess(process)
@@ -51,7 +66,7 @@ def get_google_video_for_processing(video_link=''):
             
         # * Create ffmpeg process
         callSubProcess(f'ffmpeg -y -i {path} -map 0 -c copy {newPath}')
-        #callSubProcess(f'ffmpeg -y -i {newPath} -vcodec libx265 -crf 28 {newPathCompressed}')
+        callSubProcess(f'ffmpeg -y -i {newPath} -vcodec  libx264  {newPathCompressed}')
         #callSubProcess(f'ffmpeg -y -i {newPathCompressed} -map 0 -c copy {newPath}')
         
           # * Delete all files (input, output)
@@ -67,7 +82,7 @@ def get_google_video_for_processing(video_link=''):
         #     response = google_drive.save_video_to_google_drive(file_id, newPath, video_data)
         #     print(response.text)
            
-        return newPath
+        return newPathCompressed
       
 
     except Exception as e:
