@@ -7,7 +7,7 @@ This program uses Gdownloader to load Google Drive vidoes and process them for m
 Use the package manager [PIP](https://pypi.org/project/pip/) to install the dependencies.
 
 ```bash
-npm install
+pip install
 ```
 
 ## Starting the Application
@@ -20,7 +20,7 @@ uvicorn main_api:app --reload
 
 
 ## Contributing
-Pull requests will not be accepted at this time. The application is currently in development, with the first alpha release deploying in late October. 
+Pull requests will not be accepted at this time. 
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
