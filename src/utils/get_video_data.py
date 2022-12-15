@@ -66,7 +66,7 @@ def get_google_video_for_processing(video_link=''):
             
         # * Create ffmpeg process
         callSubProcess(f'ffmpeg -y -i {path} -map 0 -c copy {newPath}')
-        callSubProcess(f'ffmpeg -y -i {newPath} -vcodec  libx264  {newPathCompressed}')
+       # callSubProcess(f'ffmpeg -y -i {newPath} -vcodec  libx264  {newPathCompressed}')
         #callSubProcess(f'ffmpeg -y -i {newPathCompressed} -map 0 -c copy {newPath}')
         
           # * Delete all files (input, output)
@@ -82,7 +82,7 @@ def get_google_video_for_processing(video_link=''):
         #     response = google_drive.save_video_to_google_drive(file_id, newPath, video_data)
         #     print(response.text)
            
-        return newPathCompressed
+        return newPath
       
 
     except Exception as e:
