@@ -13,7 +13,8 @@ app = FastAPI(
 origins = [
     "http://localhost",
     "http://localhost:8000",
-     "http://localhost:8080",
+    "http://localhost:8080",
+    "http://localhost:5173/",
     "https://amdcapstone.netlify.app/",
     "*"
 ]
@@ -27,6 +28,7 @@ app.add_middleware(
 )
 
 app.include_router(api_router)
+
 
 @app.get("/")
 def read_root():
